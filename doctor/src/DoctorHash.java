@@ -1,34 +1,46 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DoctorHash {
-     private final HashMap<String, Doctor> doctorMap = new HashMap<>();
+    private HashMap<String, Doctor> doctors = new HashMap<>();
 
-    public ArrayList<Doctor> getDoctorList() {
-        return new ArrayList<>(doctorMap.values());
-    }
-
+    // Thêm bác sĩ vào danh sách
     public void addDoctor(Doctor doctor) {
-        doctorMap.put(doctor.getCode(), doctor);
+        if (doctors.containsKey(doctor.getCode())) {
+            throw new IllegalArgumentException("Doctor code already exists.");
+        }
+        doctors.put(doctor.getCode(), doctor);
     }
 
-    public HashMap<String, Doctor> searchDoctor(String code) {
+    // Cập nhật thông tin bác sĩ
+    public void updateDoctor(Doctor doctor) {
+        if (!doctors.containsKey(doctor.getCode())) {
+            throw new IllegalArgumentException("Doctor does not exist.");
+        }
+        doctors.put(doctor.getCode(), doctor);
+    }
+
+    // Xóa bác sĩ
+    public void deleteDoctor(String code) {
+        if (!doctors.containsKey(code)) {
+            throw new IllegalArgumentException("Doctor code not found.");
+        }
+        doctors.remove(code);
+    }
+
+    // Tìm kiếm bác sĩ theo mã hoặc tên
+    public HashMap<String, Doctor> searchDoctor(String search) {
         HashMap<String, Doctor> result = new HashMap<>();
-        for (Doctor doctor : doctorMap.values()) {
-            if (doctor.getCode().equalsIgnoreCase(code)
-                    || doctor.getName().toLowerCase().contains(code.toLowerCase())
-                    || doctor.getSpecialization().toLowerCase().contains(code.toLowerCase())) {
+        for (Doctor doctor : doctors.values()) {
+            if (doctor.getCode().equalsIgnoreCase(search) || 
+                doctor.getName().toLowerCase().contains(search.toLowerCase())) {
                 result.put(doctor.getCode(), doctor);
             }
         }
         return result;
     }
 
-    public void updateDoctor(Doctor doctor) {
-        doctorMap.put(doctor.getCode(), doctor);
-    }
-
-    public void deleteDoctor(String code) {
-        doctorMap.remove(code);
+    // Trả về tất cả bác sĩ trong danh sách
+    public HashMap<String, Doctor> getAllDoctors() {
+        return doctors;
     }
 }
