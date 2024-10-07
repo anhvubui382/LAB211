@@ -4,8 +4,11 @@ public class Doctor {
     private String specialization;
     private int availability;
 
+    public Doctor() {
+    }
+
     // Constructor
-    public Doctor(String code, String name, String specialization, int availability) {
+    public Doctor(String code, String name, String specialization, int availability) throws Exception {
         setCode(code);
         setName(name);
         setSpecialization(specialization);
@@ -18,9 +21,9 @@ public class Doctor {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(String code) throws Exception {
         if (code == null || code.trim().isEmpty()) {
-            throw new IllegalArgumentException("Doctor code cannot be null or empty.");
+            throw new Exception("Doctor code cannot be null or empty.");
         }
         this.code = code;
     }

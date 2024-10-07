@@ -18,7 +18,7 @@ public class Manager {
     }
 
     // Thêm bác sĩ mới
-    public static void addDoctor(ArrayList<Doctor> ld) {
+    public static void addDoctor(ArrayList<Doctor> ld) throws Exception {
         System.out.print("Enter code: ");
         String code = Validate.checkInputString();
         if (!Validate.checkCodeExist(ld, code)) {
@@ -40,7 +40,7 @@ public class Manager {
     }
 
     // Cập nhật thông tin bác sĩ
-    public static void updateDoctor(ArrayList<Doctor> ld) {
+    public static void updateDoctor(ArrayList<Doctor> ld) throws Exception {
         System.out.print("Enter code: ");
         String code = Validate.checkInputString();
         if (Validate.checkCodeExist(ld, code)) {
