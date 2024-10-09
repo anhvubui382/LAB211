@@ -23,12 +23,29 @@ public class Validate {
     }
 
     public static String checkInputString() {
-        return scanner.nextLine();
+        //loop until user input correct
+        while (true) {
+            String result = scanner.nextLine().trim();
+            if (result.isEmpty()) {
+                System.err.println("Cannot be null");
+                System.out.print("Enter again: ");
+            } else {
+                return result;
+            }
+        }
     }
 
+   
     public static int checkInputInt() {
-       
-      return scanner.nextInt();
-           
+        while (true) {
+            try {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.err.println("Please input number integer");
+                System.out.print("Enter again: ");
+            }
+        }
     }
+           
+    
 }

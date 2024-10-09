@@ -16,23 +16,23 @@ import java.util.ArrayList;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ArrayList<Country> lc = new ArrayList<>();
         //loop until user want to exist
         while (true) {
             int choice = ManageEastAsiaCountries.menu();
             switch (choice) {
                 case 1:
-                    ManageEastAsiaCountries.inputCountry(lc);
+                    ManageEastAsiaCountries.inputCountry();
                     break;
                 case 2:
-                    ManageEastAsiaCountries.printCountry(lc);
+                    ManageEastAsiaCountries.printCountry();
                     break;
                 case 3:
-                    ManageEastAsiaCountries.searchByName(lc);
+                    ManageEastAsiaCountries.searchByName();
                     break;
                 case 4:
-                    ManageEastAsiaCountries.printCountrySorted(lc);
+                    ManageEastAsiaCountries.printCountrySorted();
                     break;
                 case 5:
                     return;

@@ -6,7 +6,7 @@ public class Doctor {
     private String name;
     private String specialization;
     private int availability; // Kiểu nguyên thủy int
-
+    private static  ArrayList<Doctor> ld = new ArrayList<>();
     public Doctor() {
     }
 
@@ -70,32 +70,42 @@ public class Doctor {
         return String.format("%-10s%-15s%-25s%-20d", code, name, specialization, availability);
     }
     // Cho phép người dùng thêm bác sĩ
-    public static void addDoctor(ArrayList<Doctor> ld) {
+    public static void addDoctor() {
         try {
-            System.out.print("Enter code: ");
-            String code = Validate.checkInputString();
-           
+             Doctor newDoctor = new Doctor();
 
-            System.out.print("Enter name: ");
-            String name = Validate.checkInputString();
-            System.out.print("Enter specialization: ");
-            String specialization = Validate.checkInputString();
-            System.out.print("Enter availability: ");
-            int availability = Validate.checkInputInt();
+        // Set code
+        System.out.print("Enter code: ");
+        newDoctor.setCode(Validate.checkInputString());
+      
+        // Set name
+        System.out.print("Enter name: ");
+    
+        newDoctor.setName(Validate.checkInputString());
+    
+        System.out.print("Enter specialization: ");
+       
+        newDoctor.setSpecialization(Validate.checkInputString()); // Call the setSpecialization() method
 
-            ld.add(new Doctor(code, name, specialization, availability));
-            System.out.println("Add successful.");
+        // Set availability
+        System.out.print("Enter availability: ");
+        
+        newDoctor.setAvailability(Validate.checkInputInt()); // Call the setAvailability() method
+
+        // Add the new doctor to the list
+        ld.add(newDoctor);
+        System.out.println("Add successful.");
         } catch (Exception e) {
             System.err.println("Error adding doctor: " + e.getMessage());
         }
     }
 
     // Cho phép người dùng cập nhật thông tin bác sĩ
-    public static void updateDoctor(ArrayList<Doctor> ld) {
+    public static void updateDoctor() {
         try {
             System.out.print("Enter code to update: ");
             String code = Validate.checkInputString();
-            Doctor doctor = getDoctorByCode(ld, code);
+            Doctor doctor = getDoctorByCode(code);
             if (doctor == null) {
                 System.err.println("Not found doctor.");
                 return;
@@ -126,7 +136,7 @@ public class Doctor {
         }
     }
  // Lấy bác sĩ theo mã
-    public static Doctor getDoctorByCode(ArrayList<Doctor> ld, String code) {
+    public static Doctor getDoctorByCode(String code) {
         for (Doctor doctor : ld) {
             if (doctor.getCode().equalsIgnoreCase(code)) {
                 return doctor;
@@ -136,7 +146,7 @@ public class Doctor {
     }
 
     // Lấy danh sách bác sĩ tìm thấy theo tên
-    public static ArrayList<Doctor> listFoundByName(ArrayList<Doctor> ld, String name) {
+    public static ArrayList<Doctor> listFoundByName(String name) {
         ArrayList<Doctor> listFoundByName = new ArrayList<>();
         for (Doctor doctor : ld) {
             if (doctor.getName().contains(name)) {
@@ -146,10 +156,11 @@ public class Doctor {
         return listFoundByName;
     }
     // Cho phép người dùng xóa bác sĩ
-    public static void deleteDoctor(ArrayList<Doctor> ld) {
+    public static void deleteDoctor() {
         System.out.print("Enter code: ");
         String code = Validate.checkInputString();
-        Doctor doctor = getDoctorByCode(ld, code);
+        
+        Doctor doctor = getDoctorByCode(code);
         if (doctor == null) {
             System.err.println("Not found doctor.");
             return;
@@ -159,10 +170,10 @@ public class Doctor {
     }
 
     // Cho phép người dùng tìm kiếm bác sĩ
-    public static void searchDoctor(ArrayList<Doctor> ld) {
+    public static void searchDoctor() {
         System.out.print("Enter name: ");
         String nameSearch = Validate.checkInputString();
-        ArrayList<Doctor> listFoundByName = listFoundByName(ld, nameSearch);
+        ArrayList<Doctor> listFoundByName = listFoundByName(nameSearch);
         if (listFoundByName.isEmpty()) {
             System.err.println("No doctors found.");
         } else {

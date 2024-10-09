@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
-import Entity.Worker;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,7 +38,7 @@ public class Validate {
         while (true) {
             String result = in.nextLine().trim();
             if (result.isEmpty()) {
-                System.err.println("Not empty");
+                System.err.println("Not empty func");
                 System.out.print("Enter again: ");
             } else {
                 return result;

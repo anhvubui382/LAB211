@@ -1,12 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author anhvu
- */
 public class Account {
     private String username;
     private String password;
@@ -19,70 +10,111 @@ public class Account {
     public Account() {
     }
 
-    public Account(String username, String password, String name, String phone, String email, String address, String dateOfBirth) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.dateOfBirth = dateOfBirth;
+    public Account(String username, String password, String name, String phone, String email, String address, String dateOfBirth) throws Exception {
+        setUsername(username);
+        setPassword(password);
+        setName(name);
+        setPhone(phone);
+        setEmail(email);
+        setAddress(address);
+        setDateOfBirth(dateOfBirth);
     }
 
-    public String getUsername() {
+    public String getUsername() throws Exception {
+        if (username == null || username.trim().isEmpty()) {
+            throw new Exception("Username cannot be null or empty.");
+        }
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String username) throws Exception {
+        if (username == null || username.trim().isEmpty()) {
+            throw new Exception("Username cannot be null or empty.");
+        }
         this.username = username;
     }
 
-    public String getPassword() {
+    public String getPassword() throws Exception {
+        if (password == null || password.trim().isEmpty()) {
+            throw new Exception("Password cannot be null or empty.");
+        }
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws Exception {
+        if (password == null || password.trim().isEmpty()) {
+            throw new Exception("Password cannot be null or empty.");
+        }
         this.password = password;
     }
 
-    public String getName() {
+    public String getName() throws Exception {
+        if (name == null || name.trim().isEmpty()) {
+            throw new Exception("Name cannot be null or empty.");
+        }
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws Exception {
+        if (name == null || name.trim().isEmpty()) {
+            throw new Exception("Name cannot be null or empty.");
+        }
         this.name = name;
     }
 
-    public String getPhone() {
+    public String getPhone() throws Exception {
+        if (phone == null || phone.trim().isEmpty()) {
+            throw new Exception("Phone number cannot be null or empty.");
+        }
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(String phone) throws Exception {
+        if (phone == null || phone.trim().isEmpty()) {
+            throw new Exception("Phone number cannot be null or empty.");
+        }
         this.phone = phone;
     }
 
-    public String getEmail() {
+    public String getEmail() throws Exception {
+        if (email == null || email.trim().isEmpty()) {
+            throw new Exception("Email cannot be null or empty.");
+        }
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email) throws Exception {
+        if (email == null || email.trim().isEmpty()) {
+            throw new Exception("Email cannot be null or empty.");
+        }
         this.email = email;
     }
 
-    public String getAddress() {
+    public String getAddress() throws Exception {
+        if (address == null || address.trim().isEmpty()) {
+            throw new Exception("Address cannot be null or empty.");
+        }
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String address) throws Exception {
+        if (address == null || address.trim().isEmpty()) {
+            throw new Exception("Address cannot be null or empty.");
+        }
         this.address = address;
     }
 
-    public String getDateOfBirth() {
+    public String getDateOfBirth() throws Exception {
+        if (dateOfBirth == null || dateOfBirth.trim().isEmpty()) {
+            throw new Exception("Date of birth cannot be null or empty.");
+        }
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) throws Exception {
+        if (dateOfBirth == null || dateOfBirth.trim().isEmpty()) {
+            throw new Exception("Date of birth cannot be null or empty.");
+        }
         this.dateOfBirth = dateOfBirth;
     }
-    
 }

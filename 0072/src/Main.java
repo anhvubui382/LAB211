@@ -23,7 +23,8 @@ public class Main {
     private static final Scanner in = new Scanner(System.in);
     private static final String PHONE_VALID = "^\\d{9,10}$";
     private static final String EMAIL_VALID = "^[0-9A-Za-z+_.%]+@[0-9A-Za-z.-]+\\.[A-Za-z]{2,4}$";
-
+    private static final ArrayList<Account> la = new ArrayList<>();
+    private static final Account account = new Account();
     private static int checkIntLimit(int min, int max) {
         while (true) {
             try {
@@ -88,7 +89,7 @@ public class Main {
         }
     }
 
-    private static String checkInputUsername(ArrayList<Account> la) {
+    private static String checkInputUsername() throws Exception {
         while (true) {
             String result = checkInputString();
             for (int i = 0; i < la.size(); i++) {
@@ -117,26 +118,34 @@ public class Main {
         return null;
     }
 
-    private static void addAccount(ArrayList<Account> la) {
+    private static void addAccount(ArrayList<Account> la) throws Exception {
+//        Account account = new Account();
         System.out.println("Enter username: ");
-        String username = checkInputUsername(la);
+        account.setUsername(checkInputUsername());
+//        String username = checkInputUsername();
         System.out.println("Enter password: ");
-        String password = checkInputString();
+        account.setPassword(checkInputString());
+//        String password = checkInputString();
+
         System.out.println("Enter name: ");
-        String name = checkInputString();
+        account.setName(checkInputString());
         System.out.println("Enter phone: ");
-        String phone = checkInputPhone();
+     
+        account.setPhone(checkInputPhone());
         System.out.println("Enter email: ");
-        String email = checkInputEmail();
+        account.setEmail(checkInputEmail());
+       
         System.out.println("Enter address: ");
-        String address = checkInputString();
+        account.setAddress(checkInputString());
+       
         System.out.println("Enter Date of birth: ");
         String dateOfBirth = checkInputDate();
-        la.add(new Account(username, MD5Encryption(password), name, phone, email, address, dateOfBirth));
+        account.setDateOfBirth(checkInputDate());
+        la.add(account);
         System.out.println("Add success!!!");
     }
 
-    private static void login(ArrayList<Account> la) {
+    private static void login() throws Exception {
         if (la.isEmpty()) {
             System.out.println("Account empty");
             return;
@@ -154,7 +163,7 @@ public class Main {
         }
     }
 
-    private static void changePassword(Account accountLogin) {
+    private static void changePassword(Account accountLogin) throws Exception {
         String choice;
         while (true) {
             choice = in.nextLine().trim();
@@ -186,7 +195,7 @@ public class Main {
             }
         }
     }
-    private static void display(){
+    private static void display() throws Exception{
         ArrayList<Account> la = new ArrayList<>();
         while(true){
             System.out.println("1. Add user");
@@ -199,7 +208,7 @@ public class Main {
                     addAccount(la);
                     break;
                 case 2: 
-                    login(la);
+                    login();
                     break;
                 case 3:
                     return;
@@ -207,7 +216,7 @@ public class Main {
         }
     }
 
-    private static Account findAccount(ArrayList<Account> la, String username, String password) {
+    private static Account findAccount(ArrayList<Account> la, String username, String password) throws Exception {
         for (Account account : la) {
             if (username.equalsIgnoreCase(account.getUsername())) {
                 if (MD5Encryption(password).equalsIgnoreCase(account.getPassword())) {
@@ -221,7 +230,7 @@ public class Main {
         return null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         display();
     }
 

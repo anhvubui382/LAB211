@@ -15,9 +15,12 @@ public class Country extends EastAsiaCountries implements Comparable<Country> {
     }
 
     public Country(String countryTerrain, String countryCode,
-            String countryName, double countryArea) {
+            String countryName, double countryArea) throws Exception {
         super(countryCode, countryName, countryArea);
-        this.countryTerrain = countryTerrain;
+        setCountryArea(countryArea);
+        setCountryName(countryName);
+        setCountryCode(countryCode);
+        setCountryTerrain(countryTerrain);
     }
 
     @Override
@@ -26,7 +29,10 @@ public class Country extends EastAsiaCountries implements Comparable<Country> {
                 this.countryName, this.countryArea, this.countryTerrain);
     }
 
-    public String getCountryTerrain() {
+    public String getCountryTerrain() throws Exception{
+          if (countryTerrain == null || countryTerrain.trim().isEmpty()) {
+            throw new Exception("CountryTerrain name cannot be null or empty.");
+        }
         return countryTerrain;
     }
 
