@@ -35,15 +35,6 @@ public class Validate {
         }
     }
 
-    // Kiểm tra xem id có tồn tại hay không
-    public boolean checkIdExist(ArrayList<Worker> lw, String id) {
-        for (Worker worker : lw) {
-            if (id.equalsIgnoreCase(worker.getId())) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     // Kiểm tra mức lương nhập vào phải lớn hơn 0
     public int checkInputSalary() {
