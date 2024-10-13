@@ -2,11 +2,18 @@ public class Worker {
     private String id;
     private String name;
     private int age;
-    private int salary;
+    private Double salary;
     private String workLocation;
 
-    public enum SalaryStatus {
-        INCREASE, DECREASE
+    public Worker(String id, String name, int age, Double salary, String workLocation) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+        this.workLocation = workLocation;
+    }
+
+    public Worker() {
     }
 
     // Getters and Setters
@@ -40,11 +47,11 @@ public class Worker {
         this.age = age;
     }
 
-    public int getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) throws Exception {
+    public void setSalary(Double salary) throws Exception {
         if (salary <= 0) {
             throw new Exception("Salary must be greater than 0.");
         }
