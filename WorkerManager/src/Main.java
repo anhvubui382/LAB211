@@ -5,8 +5,11 @@ import java.util.Scanner;
 
 public class Main {
 
+
+
     public static void main(String[] args) {
         ListWorker workerList = new ListWorker();
+        SalaryHistory salaryHistory = new SalaryHistory(workerList);
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -32,63 +35,13 @@ public class Main {
                 case 1: // Add Worker
                     try {
                     Worker newWorker = new Worker();
-                    while (true) {
-                        try {
-                            System.out.print("Enter worker id: ");
-                            String id = scanner.nextLine().trim();
-                            newWorker.setId(id);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
+                   
+                    if (!workerList.checkValidWorker(newWorker.inputWorker())) {
+                        System.out.println("Add Doctor Successfull");
+                        workerList.addWorker(newWorker);
+                    } else {
+                        System.out.println("Failed to add doctor.");
                     }
-
-                    while (true) {
-                        try {
-                            System.out.print("Enter worker name: ");
-                            String name = scanner.nextLine().trim();
-                            newWorker.setName(name);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-
-                    while (true) {
-                        try {
-                            System.out.print("Enter worker age: ");
-                            int age = Integer.parseInt(scanner.nextLine().trim());
-                            newWorker.setAge(age);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-
-                    while (true) {
-                        try {
-                            System.out.print("Enter worker salary: ");
-                            Double salary = Double.parseDouble(scanner.nextLine().trim());
-                            newWorker.setSalary(salary);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-
-                    while (true) {
-                        try {
-                            System.out.print("Enter work location: ");
-                            String workLocation = scanner.nextLine().trim();
-                            newWorker.setWorkLocation(workLocation);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-
-                    workerList.addWorker(newWorker);
-                    System.out.println("Worker added successfully.");
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
                 }
@@ -100,7 +53,7 @@ public class Main {
                     String idToIncrease = scanner.nextLine().trim();
                     System.out.print("Enter amount to increase salary: ");
                     double increaseAmount = Double.parseDouble(scanner.nextLine().trim());
-                    workerList.changeSalary("INCREASE", idToIncrease, increaseAmount);
+                    salaryHistory.changeSalary("INCREASE", idToIncrease, increaseAmount);
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
                 }
@@ -112,7 +65,7 @@ public class Main {
                     String idToDecrease = scanner.nextLine().trim();
                     System.out.print("Enter amount to decrease salary: ");
                     double decreaseAmount = Double.parseDouble(scanner.nextLine().trim());
-                    workerList.changeSalary("DECREASE", idToDecrease, decreaseAmount);
+                    salaryHistory.changeSalary("DECREASE", idToDecrease, decreaseAmount);
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
                 }
@@ -120,9 +73,9 @@ public class Main {
 
                 case 4: // Show Adjusted Salary Workers
                     System.out.printf("%-15s %-15s %10s %15s %10s %s%n", "Code", "Name", "Age", "Salary", "Status", "Date");
-                    List<SalaryHistory> workerList2 = workerList.getInformationSalary(); // Giả sử đây là danh sách bạn có
+                    List<SalaryHistory> workerList2 = salaryHistory.getInformationSalary(); // Giả sử đây là danh sách bạn có
 
-                    // Sắp xếp danh sách theo id
+                    // Sắp xếp danh sách theo id1
                     workerList2.sort(Comparator.comparing(SalaryHistory::getId));
                     for (SalaryHistory history : workerList2) {
                         System.out.println(history);

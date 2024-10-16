@@ -1,142 +1,98 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
+/**
+ *
+ * @author admin
+ */
 public class Main {
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in); // Create a Scanner object for input
-        DoctorList doctorList = new DoctorList(); // Create a DoctorList instance
-        Doctor doctor = new Doctor();
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws Exception {
+        Validate val = new Validate();
+        DoctorList docList = new DoctorList();
+        Doctor doc = new Doctor();
         while (true) {
-            System.out.println("\nMenu:");
-            System.out.println("1. Add Doctor");
-            System.out.println("2. Update Doctor");
-            System.out.println("3. Delete Doctor");
-            System.out.println("4. Display Doctors");
+            System.out.println("=========Doctor Management=========");
+            System.out.println("1.Add doctor");
+            System.out.println("2.Update Doctor");
+            System.out.println("3.Delete Doctor");
+            System.out.println("4.Search Doctor");
             System.out.println("5. Exit");
-            System.out.print("Select an option (1-5): ");
-
-            int choice = Integer.parseInt(scanner.nextLine().trim());
-
+            int choice = val.checkInputLimit(1, 5);
             switch (choice) {
-                case 1: // Add Doctor
-                    while (true) {
-                        try {
-                            while (true) {
-                                try {
-                                    System.out.print("Enter doctor code: ");
-                                    String code = scanner.nextLine().trim();
-                                    doctor.setCode(code);
-                                    break;
-                                } catch (Exception e) {
-                                    System.out.println(e.getMessage());
-                                }
-                            }
-                            while (true) {
-                                try {
-                                    System.out.print("Enter doctor name: ");
-                                    String name = scanner.nextLine().trim();
-                                    doctor.setName(name);
-                                    break;
-                                } catch (Exception e) {
-                                    System.out.println(e.getMessage());
-                                }
-                            }
-                            while (true) {
-                                try {
-                                    System.out.print("Enter doctor specialization: ");
-                                    String specialization = scanner.nextLine().trim();
-                                    doctor.setSpecialization(specialization);
-                                    break;
-                                } catch (Exception e) {
-                                    System.out.println(e.getMessage());
-                                }
-                            }
-                            while (true) {
-                                try {
-                                    System.out.print("Enter doctor availability: ");
-                                    int availability = Integer.parseInt(scanner.nextLine().trim());
-                                    doctor.setAvailability(availability);
-                                    break;
-                                } catch (Exception e) {
-                                    System.out.println(e.getMessage());
-                                }
-                            }
-
-                            // Add the doctor to the list
-                            doctorList.addDoctor(doctor);
-                            System.out.println("Doctor added successfully.");
-
-                        } catch (Exception e) {
-                            System.out.println("Error: " + e.getMessage());
-                        }
-                        break;
-                    }
-
-                case 2: // Update Doctor
+                case 1:
                     try {
-                    System.out.print("Enter doctor code to update: ");
-                    String code = scanner.nextLine().trim();
-                    Doctor existingDoctor = doctorList.findDoctorByCode(code);
-                    if (existingDoctor != null) {
-                        System.out.print("Enter new name (leave blank to keep current): ");
-                        String name = scanner.nextLine().trim();
-                        if (!name.isEmpty()) {
-                            existingDoctor.setName(name);
-                        }
-
-                        System.out.print("Enter new specialization (leave blank to keep current): ");
-                        String specialization = scanner.nextLine().trim();
-                        if (!specialization.isEmpty()) {
-                            existingDoctor.setSpecialization(specialization);
-                        }
-
-                        System.out.print("Enter new availability (leave blank to keep current): ");
-                        String availabilityInput = scanner.nextLine().trim();
-                        if (!availabilityInput.isEmpty()) {
-                            int availability = Integer.parseInt(availabilityInput);
-                            existingDoctor.setAvailability(availability);
-                        }
-
+                    System.out.println("---------Add Doctor---------");
+                    if (docList.checkValidDoctor(doc.inputDoctor())) {
+                        System.out.println("Add Doctor Successfull");
+                        docList.addDoctor(doc);
+                    } else {
+                        System.out.println("Failed to add doctor.");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+                case 2:
+                  try {
+                    System.out.println("---------Update Doctor---------");
+                    System.out.print("Enter code: ");
+                    String checkCode = val.checkInputString();
+                    boolean isUpdated = docList.updateDoctor(doc.updateInfo(checkCode));
+                    if (isUpdated) {
                         System.out.println("Doctor updated successfully.");
                     } else {
-                        System.out.println("Doctor not found.");
+                        System.out.println("Failed to update doctor.");
                     }
-
                 } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
+                    e.printStackTrace();
                 }
                 break;
-
-                case 3: // Delete Doctor
-                    try {
-                    System.out.print("Enter doctor code to delete: ");
-                    String code = scanner.nextLine().trim();
-                    boolean deleted = doctorList.deleteDoctor(code);
-                    if (deleted) {
-                        System.out.println("Doctor deleted successfully.");
+                case 3:
+                 try {
+                    System.out.println("---------Delete Doctor---------");
+                    System.out.print("Enter code: ");
+                    String delCode = val.checkInputString();
+                    Doctor docFind = docList.findCode(delCode);
+                    if (docFind == null) {
+                        System.out.println("Failed to delete doctor.");
                     } else {
-                        System.out.println("Doctor not found.");
+                        docList.deleteDoctor(delCode);
+                        System.out.println("Doctor updated successfully.");
                     }
 
                 } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
+                    e.printStackTrace();
                 }
                 break;
-
-                case 4: // Display Doctors
-                    System.out.println("\nList of Doctors:");
-                    doctorList.displayDoctors();
-                    break;
-
-                case 5: // Exit
-                    System.out.println("Exiting...");
-                    scanner.close();
-                    return;
-
-                default:
-                    System.out.println("Invalid choice. Please select a valid option.");
+                case 4:
+                    try {
+                    System.out.println("---------Search Doctor---------");
+                    System.out.print("Enter text: ");
+                    String searchCode = val.checkInputString();
+                    ArrayList<Doctor> list = docList.searchDoctor(searchCode);
+                    if (list == null) {
+                        System.out.println("Cannot find doctor.");
+                    } else {
+                        System.out.printf("%-15s%-20s%-25s%-20s\n", "Code", "Name", "Specialization", "Availability");
+                        for (Doctor doctor : list) {
+                            System.out.printf("%-15s%-20s%-25s%-20s\n", doctor.getCode(), doctor.getName(), doctor.getSpecialization(), doctor.getAvailability());
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+                case 5: return;
             }
         }
     }
+
 }

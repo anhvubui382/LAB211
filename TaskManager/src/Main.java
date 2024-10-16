@@ -20,6 +20,7 @@ public class Main {
      * @param args the command line arguments
      */
     private static List<Task> taskList = new ArrayList<>();
+ 
     private static List<TaskType> taskTypes = Arrays.asList(
             new TaskType(1, "Code"),
             new TaskType(2, "Test"),
@@ -46,101 +47,23 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    while (true) {
-                        try {
-                            System.out.print("Enter Requirement Name: ");
-                            String requirementName = scanner.nextLine();
-                            task.setRequirementName(requirementName);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-                    while (true) {
-
-                        try {
-                            System.out.print("Enter TaskTypeID (1-4): ");
-                            int taskTypeID = Integer.parseInt(scanner.nextLine());
-                            TaskType taskType = taskList.getTaskTypeById(taskTypeID);
-                            task.setId(taskTypeID);
-                            task.setTaskType(taskType);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-
-                    while (true) {
-                        try {
-                            System.out.print("Enter Date (dd-MM-yyyy): ");
-                            String dateStr = scanner.nextLine();
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                            Date date = dateFormat.parse(dateStr);
-                            task.setDate(date);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-                    while (true) {
-                        try {
-                            System.out.print("Enter Plan From (8.0 to 17.5): ");
-                            double planFrom = Double.parseDouble(scanner.nextLine());
-                            task.setPlanFrom(planFrom);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-                    while (true) {
-                        try {
-                            System.out.print("Enter Plan To (greater than Plan From): ");
-                            double planTo = Double.parseDouble(scanner.nextLine());
-                            task.setPlanTo(planTo);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-
-                    while (true) {
-                        try {
-                            System.out.print("Enter Assignee: ");
-                            String assignee = scanner.nextLine();
-                            task.setAssignee(assignee);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-                    while (true) {
-                        try {
-                            System.out.print("Enter Reviewer: ");
-                            String reviewer = scanner.nextLine();
-                            task.setReviewer(reviewer);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-
-//                        if (planFrom >= planTo || planFrom < 8.0 || planTo > 17.5) {
-//                            throw new Exception("Invalid Plan From/To times.");
-//                        }
-                    taskList.addTask(task);
+                    System.out.println("-----Add worker-----");
+                    task.inputTask(task);
+                    taskList.addTask(task);  
+                   
                     break;
                 case 2:
                     
-                        try{
-                          System.out.print("Enter Task ID to delete: ");
+                        try {
+                    System.out.print("Enter Task ID to delete: ");
                     int taskId = Integer.parseInt(scanner.nextLine());
                     taskList.deleteTask(taskId);
-                    
-                        }catch (Exception e){
-                            System.out.println(e.getMessage());
-                        }
-                   
-                   break;
+
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+                break;
                 case 3:
                     taskList.showTasks();
                     break;

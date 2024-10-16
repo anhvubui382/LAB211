@@ -1,66 +1,91 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
+/**
+ *
+ * @author admin
+ */
 public class DoctorList {
-    private ArrayList<Doctor> doctors;
 
-    public DoctorList() {
-        this.doctors = new ArrayList<>(); // Initialize the list
-    }
+    ArrayList<Doctor> doctorlist = new ArrayList<>();
 
-    // Method to add a doctor to the list
-    public boolean addDoctor(Doctor newDoctor) {
-        try {
-            doctors.add(newDoctor);
-            System.out.println("Doctor added successfully: " + newDoctor);
-            return true;
-        } catch (Exception e) {
-            System.out.println("Error adding doctor: " + e.getMessage());
-            return false;
-        }
-    }
-
-    // Method to display all doctors
-    public void displayDoctors() {
-        System.out.printf("%-10s%-15s%-25s%-20s\n", "Code", "Name", "Specialization", "Availability");
-        for (Doctor doctor : doctors) {
-            System.out.println(doctor);
-        }
-    }
-
-    // Method to find a doctor by code
-    public Doctor findDoctorByCode(String code) {
-        for (Doctor doctor : doctors) {
-            if (doctor.getCode().equalsIgnoreCase(code)) {
-                return doctor; // Return the doctor if found
+    public boolean checkValidDoctor(Doctor inputDoctor) {
+        for (Doctor doctor1 : doctorlist) {
+            if (doctor1.getCode().equals(inputDoctor.getCode())) {
+                return true;
             }
         }
-        return null; // Return null if no doctor is found
+        return false;
     }
 
-    // Method to delete a doctor by code
-    public boolean deleteDoctor(String code) {
-        Doctor doctorToRemove = findDoctorByCode(code);
-        if (doctorToRemove != null) {
-            doctors.remove(doctorToRemove); // Remove the doctor from the list
-            System.out.println("Doctor deleted successfully: " + doctorToRemove);
-            return true; // Return true if removed successfully
+    public void addDoctor(Doctor doc) {
+        doctorlist.add(doc);
+    }
+
+    public Doctor findCode(String delCode) {
+        for (Doctor doctor : doctorlist) {
+            if (doctor.getCode().equals(delCode)) {
+                return doctor;
+            }
         }
-        System.out.println("Doctor with code " + code + " not found.");
-        return false; // Return false if no doctor was found to remove
+        return null;
     }
 
-    // Method to search for a doctor by code and display their information
-    public void searchDoctor() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the doctor code to search: ");
-        String code = scanner.nextLine();
-
-        Doctor foundDoctor = findDoctorByCode(code);
-        if (foundDoctor != null) {
-            System.out.println("Doctor found: " + foundDoctor);
-        } else {
-            System.out.println("No doctor found with code: " + code);
+    public void deleteDoctor(String delCode) {
+        for (Doctor doctor : doctorlist) {
+            if (doctor.equals(findCode(delCode))) {
+                doctorlist.remove(doctor);
+                break;
+            }
         }
     }
+
+    public ArrayList<Doctor> searchDoctor(String searchCode) throws Exception {
+        if (doctorlist.isEmpty()) {
+            throw new Exception("Database does not exist");
+        }
+        ArrayList<Doctor> listFound = new ArrayList<>();
+        for (Doctor doctor : doctorlist) {
+            if (doctor.getName().equalsIgnoreCase(searchCode) || doctor.getCode().equalsIgnoreCase(searchCode)) {
+                listFound.add(doctor);
+            }
+        }
+        return listFound;
+    }
+
+    public void displayDoctor() {
+        for (Doctor d : doctorlist) {
+            d.display();
+        }
+    }
+
+    boolean updateDoctor(Doctor updateInfo) throws Exception {
+        if (doctorlist.isEmpty()) {
+            throw new Exception("Database does not exist");
+        }
+        if (updateInfo == null) {
+            throw new Exception("Data does not exist");
+        }
+        if (!doctorlist.contains(updateInfo.getCode())) {
+            throw new Exception("Doctor code doesn’t exist");
+        }
+        int index = -1;
+        for (int i = 0; i < doctorlist.size(); i++) {
+            if (doctorlist.get(i).getCode().equals(updateInfo.getCode())) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) {
+            throw new Exception("Doctor code doesn’t exist");
+        }
+        doctorlist.set(index, updateInfo);
+        return true;
+    }
+
 }
