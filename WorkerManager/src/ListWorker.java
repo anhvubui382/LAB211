@@ -39,6 +39,53 @@ public class ListWorker {
         return null;
     }
 
+    public boolean changeSalary(String status, String id, double amount) throws Exception {
+        // Use workerList to find the worker by ID
+        Worker worker = findWorkerById(id);
+        if (worker == null) {
+            throw new Exception("Worker not found.");
+        }
+
+        if (amount <= 0) {
+            throw new Exception("Amount must be greater than 0.");
+        }
+
+        Double currentSalary = worker.getSalary();
+        Double newSalary;
+        String addStatus;
+
+        if (status.equals("INCREASE")) {
+            newSalary = currentSalary + amount;
+            addStatus = "UP";
+        } else if (status.equals("DECREASE")) {
+            newSalary = currentSalary - amount;
+            addStatus = "DOWN";
+        } else {
+            throw new Exception("Invalid status.");
+        }
+
+        if (newSalary < 0) {
+            throw new Exception("Salary cannot be negative.");
+        }
+
+        worker.setSalary(newSalary);
+
+        // Format the current date as a string in "dd/MM/yyyy" format
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = formatter.format(new Date());
+
+        // Log salary change with formatted date as a String
+        SalaryHistory history = new SalaryHistory(worker,formattedDate, addStatus);
+        salaryHistories.add(history);
+
+        System.out.printf("Worker's salary updated successfully. New Salary: %f%n", newSalary);
+        return true;
+    }
+
+    // Get salary history information
+    public List<SalaryHistory> getInformationSalary() {
+        return salaryHistories;
+    }
     public List<Worker> getWorkerList() {
       
         return new ArrayList<>(workers); // Return a copy of the list to avoid external modification

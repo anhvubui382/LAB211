@@ -53,7 +53,7 @@ public class Main {
                     String idToIncrease = scanner.nextLine().trim();
                     System.out.print("Enter amount to increase salary: ");
                     double increaseAmount = Double.parseDouble(scanner.nextLine().trim());
-                    salaryHistory.changeSalary("INCREASE", idToIncrease, increaseAmount);
+                    workerList.changeSalary("INCREASE", idToIncrease, increaseAmount);
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
                 }
@@ -65,7 +65,7 @@ public class Main {
                     String idToDecrease = scanner.nextLine().trim();
                     System.out.print("Enter amount to decrease salary: ");
                     double decreaseAmount = Double.parseDouble(scanner.nextLine().trim());
-                    salaryHistory.changeSalary("DECREASE", idToDecrease, decreaseAmount);
+                    workerList.changeSalary("DECREASE", idToDecrease, decreaseAmount);
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
                 }
@@ -73,7 +73,7 @@ public class Main {
 
                 case 4: // Show Adjusted Salary Workers
                     System.out.printf("%-15s %-15s %10s %15s %10s %s%n", "Code", "Name", "Age", "Salary", "Status", "Date");
-                    List<SalaryHistory> workerList2 = salaryHistory.getInformationSalary(); // Giả sử đây là danh sách bạn có
+                    List<SalaryHistory> workerList2 = workerList.getInformationSalary(); // Giả sử đây là danh sách bạn có
 
                     // Sắp xếp danh sách theo id1
                     workerList2.sort(Comparator.comparing(SalaryHistory::getId));

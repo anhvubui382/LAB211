@@ -1,13 +1,19 @@
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Worker {
+private ArrayList<SalaryHistory> salaryHistories;
     private String id;
     private String name;
     private int age;
     private Double salary;
     private String workLocation;
-Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
+
     public Worker(String id, String name, int age, Double salary, String workLocation) {
         this.id = id;
         this.name = name;
@@ -73,62 +79,64 @@ Scanner scanner = new Scanner(System.in);
     public String toString() {
         return String.format("%-15s %-15s %-15d %10f %s", id, name, age, salary, workLocation);
     }
-    public Worker inputWorker(){
+
+
+    public Worker inputWorker() {
         while (true) {
-                        try {
-                            System.out.print("Enter worker id: ");
-                            String id = scanner.nextLine().trim();
-                            setId(id);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
+            try {
+                System.out.print("Enter worker id: ");
+                String id = scanner.nextLine().trim();
+                setId(id);
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
-                    while (true) {
-                        try {
-                            System.out.print("Enter worker name: ");
-                            String name = scanner.nextLine().trim();
-                            setName(name);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
+        while (true) {
+            try {
+                System.out.print("Enter worker name: ");
+                String name = scanner.nextLine().trim();
+                setName(name);
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
-                    while (true) {
-                        try {
-                            System.out.print("Enter worker age: ");
-                            int age = Integer.parseInt(scanner.nextLine().trim());
-                            setAge(age);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
+        while (true) {
+            try {
+                System.out.print("Enter worker age: ");
+                int age = Integer.parseInt(scanner.nextLine().trim());
+                setAge(age);
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
-                    while (true) {
-                        try {
-                            System.out.print("Enter worker salary: ");
-                            Double salary = Double.parseDouble(scanner.nextLine().trim());
-                            setSalary(salary);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
+        while (true) {
+            try {
+                System.out.print("Enter worker salary: ");
+                Double salary = Double.parseDouble(scanner.nextLine().trim());
+                setSalary(salary);
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
-                    while (true) {
-                        try {
-                            System.out.print("Enter work location: ");
-                            String workLocation = scanner.nextLine().trim();
-                            setWorkLocation(workLocation);
-                            break;
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-                   
-        return  new Worker(id, name, age, salary, workLocation);
+        while (true) {
+            try {
+                System.out.print("Enter work location: ");
+                String workLocation = scanner.nextLine().trim();
+                setWorkLocation(workLocation);
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        return new Worker(id, name, age, salary, workLocation);
     }
 }

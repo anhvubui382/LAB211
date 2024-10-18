@@ -18,15 +18,16 @@ public class TaskList {
     public TaskList() {
     }
 
-    private static int lastTaskId = 0;
-
-    public static void addTask(Task task) throws Exception {
-        System.out.println(task);
-        Task newTask = new Task(lastTaskId, task.getTaskType(), task.getRequirementName(), task.getDate(), task.getPlanFrom(), task.getPlanTo(), task.getAssignee(), task.getReviewer());
-        // Thêm task vào danh sách
-        taskList.add(newTask);
-        lastTaskId++;
+    public boolean addTask(Task task) throws Exception {
+        for (Task existingTask : taskList) {
+            if (existingTask.getId() == task.getId()) {
+                throw new Exception("Task with the same ID already exists.");
+            }
+        }
+        
+        taskList.add(task);
         System.out.println("Task added successfully.");
+        return true;
     }
 
     // Function to delete task
@@ -58,6 +59,15 @@ public class TaskList {
                 System.out.println(task);
             }
         }
+    }
+
+    public static TaskType getTaskTypeById(int id) {
+        for (TaskType taskType : taskTypes) {
+            if (taskType.getId() == id) {
+                return taskType;
+            }
+        }
+        return null;
     }
 
 }

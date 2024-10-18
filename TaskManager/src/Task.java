@@ -27,6 +27,11 @@ public class Task {
 
     public Task() {
     }
+    TaskList tl = new TaskList();
+
+    Task(Task task) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     public String getRequirementName() throws Exception {
         if (requirementName.isEmpty()) {
@@ -149,6 +154,7 @@ public class Task {
         return taskType;
     }
     Validate validate = new Validate();
+
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -167,14 +173,16 @@ public class Task {
     private static int lastTaskId = 0;
     TaskType tt = new TaskType();
 
-    public Task inputTask(Task task) {
+    public Task inputTask() {
         Scanner scanner = new Scanner(System.in);
-
         while (true) {
             try {
+                lastTaskId++;
+                setId(lastTaskId);
+
                 System.out.print("Enter Requirement Name: ");
                 String requirementName = scanner.nextLine();
-                task.setRequirementName(requirementName);
+                setRequirementName(requirementName);
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -185,10 +193,10 @@ public class Task {
             try {
                 System.out.print("Enter TaskTypeID (1-4): ");
                 int taskTypeID = validate.checkInputLimit(1, 4);
-                
-                TaskType taskType = tt.getTaskTypeById(taskTypeID);
-                task.setId(taskTypeID);
-                task.setTaskType(taskType);
+
+                TaskType taskType = tl.getTaskTypeById(taskTypeID);
+
+                setTaskType(taskType);
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -201,7 +209,7 @@ public class Task {
                 String dateStr = scanner.nextLine();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 Date date = dateFormat.parse(dateStr);
-                task.setDate(date);
+                setDate(date);
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -211,7 +219,7 @@ public class Task {
             try {
                 System.out.print("Enter Plan From (8.0 to 17.5): ");
                 double planFrom = Double.parseDouble(scanner.nextLine());
-                task.setPlanFrom(planFrom);
+                setPlanFrom(planFrom);
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -221,7 +229,7 @@ public class Task {
             try {
                 System.out.print("Enter Plan To (greater than Plan From): ");
                 double planTo = Double.parseDouble(scanner.nextLine());
-                task.setPlanTo(planTo);
+                setPlanTo(planTo);
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -232,7 +240,7 @@ public class Task {
             try {
                 System.out.print("Enter Assignee: ");
                 String assignee = scanner.nextLine();
-                task.setAssignee(assignee);
+                setAssignee(assignee);
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -242,13 +250,14 @@ public class Task {
             try {
                 System.out.print("Enter Reviewer: ");
                 String reviewer = scanner.nextLine();
-                task.setReviewer(reviewer);
+                setReviewer(reviewer);
                 break;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-        return new Task(lastTaskId, task);
+
+        return new Task(id, taskType, requirementName, date, planFrom, planTo, assignee, reviewer);
     }
 
 }

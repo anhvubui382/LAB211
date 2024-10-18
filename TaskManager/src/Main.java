@@ -19,20 +19,10 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    private static List<Task> taskList = new ArrayList<>();
- 
-    private static List<TaskType> taskTypes = Arrays.asList(
-            new TaskType(1, "Code"),
-            new TaskType(2, "Test"),
-            new TaskType(3, "Design"),
-            new TaskType(4, "Review")
-    );
-    private static int lastTaskId = 0;
-
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         TaskList taskList = new TaskList();
-        Task task = new Task();
+       
         while (true) {
 
             showMenu();
@@ -47,11 +37,20 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    System.out.println("-----Add worker-----");
-                    task.inputTask(task);
-                    taskList.addTask(task);  
-                   
+                    while (true) {
+                        try {
+                            Task newTask = new Task();
+                            System.out.println("-----Add Task-----");
+                            newTask.inputTask();
+                            taskList.addTask(newTask);
+                            break;
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+
                     break;
+
                 case 2:
                     
                         try {
