@@ -19,11 +19,11 @@ public class SalaryHistory extends Worker implements Comparable<SalaryHistory> {
     }
 
     // Constructor for SalaryHistory details
-    public SalaryHistory(String date, String status, String id, String name, int age, Double salary, String workLocation) {
-        super(id, name, age, salary, workLocation);
-        this.date = date;
-        this.status = status;
-    }
+//    public SalaryHistory(String date, String status, String id, String name, int age, Double salary, String workLocation) {
+//        super(id, name, age, salary, workLocation);
+//        this.date = date;
+//        this.status = status;
+//    }
 
     public SalaryHistory(String date, String status) {
         this.date = date;
