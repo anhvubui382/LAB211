@@ -25,6 +25,7 @@ public class DoctorList {
 
     public void addDoctor(Doctor doc) {
         doctorlist.add(doc);
+        
     }
 
     public Doctor findCode(String delCode) {
@@ -45,47 +46,51 @@ public class DoctorList {
         }
     }
 
-    public ArrayList<Doctor> searchDoctor(String searchCode) throws Exception {
-        if (doctorlist.isEmpty()) {
-            throw new Exception("Database does not exist");
-        }
-        ArrayList<Doctor> listFound = new ArrayList<>();
-        for (Doctor doctor : doctorlist) {
-            if (doctor.getName().equalsIgnoreCase(searchCode) || doctor.getCode().equalsIgnoreCase(searchCode)) {
-                listFound.add(doctor);
-            }
-        }
-        return listFound;
+   public ArrayList<Doctor> searchDoctor(String searchCode) throws Exception {
+  
+    if (doctorlist.isEmpty()) {
+        throw new Exception("Database does not exist");
     }
+
+    ArrayList<Doctor> listFound = new ArrayList<>();
+    
+    // Duyệt qua danh sách bác sĩ và tìm bác sĩ chứa từ khóa tìm kiếm
+    for (Doctor doctor : doctorlist) {
+        if (doctor.getName().toLowerCase().contains(searchCode.toLowerCase()) 
+            || doctor.getCode().toLowerCase().contains(searchCode.toLowerCase())) {
+            listFound.add(doctor);
+        }
+    }
+    
+    return listFound;
+}
+
 
     public void displayDoctor() {
         for (Doctor d : doctorlist) {
-            d.display();
+            System.out.println(d);
         }
     }
 
-    boolean updateDoctor(Doctor updateInfo) throws Exception {
-        if (doctorlist.isEmpty()) {
-            throw new Exception("Database does not exist");
-        }
-        if (updateInfo == null) {
-            throw new Exception("Data does not exist");
-        }
-        if (!doctorlist.contains(updateInfo.getCode())) {
-            throw new Exception("Doctor code doesn’t exist");
-        }
-        int index = -1;
-        for (int i = 0; i < doctorlist.size(); i++) {
-            if (doctorlist.get(i).getCode().equals(updateInfo.getCode())) {
-                index = i;
-                break;
-            }
-        }
-        if (index == -1) {
-            throw new Exception("Doctor code doesn’t exist");
-        }
-        doctorlist.set(index, updateInfo);
-        return true;
+public boolean updateInfoDoctor(String code) throws Exception {
+    // Tìm kiếm bác sĩ theo mã
+    Doctor existingDoctor = findCode(code);
+    if (existingDoctor == null) {
+        throw new Exception("Doctor with code " + code + " does not exist.");
     }
+    
+    // Nhập thông tin mới từ người dùng
+    Doctor updatedDoctor = existingDoctor.updateInfo(code);
+    
+    // Cập nhật thông tin trong danh sách
+    for (int i = 0; i < doctorlist.size(); i++) {
+        if (doctorlist.get(i).getCode().equals(code)) {
+            doctorlist.set(i, updatedDoctor);
+            System.out.println("Doctor information updated successfully.");
+            return true;
+        }
+    }
+    throw new Exception("Failed to update doctor information.");
+}
 
 }

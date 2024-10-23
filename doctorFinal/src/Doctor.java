@@ -1,3 +1,6 @@
+
+import java.util.Scanner;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -9,7 +12,7 @@
  */
 public class Doctor {
 
-    Validate val = new Validate();
+    private Scanner sc = new Scanner(System.in);
     private String code, name, specialization;
     private int availability;
 
@@ -69,31 +72,35 @@ public class Doctor {
 
     public Doctor inputDoctor() throws Exception {
         System.out.print("Enter Code: ");
-        setCode(val.checkInputString());
+        setCode(sc.nextLine().trim());
         System.out.print("Enter name: ");
-        setName(val.checkInputString());
-        System.out.print("Enter special");
-        setSpecialization(val.checkInputString());
-        System.out.print("Enter Availibilyti");
-        setAvailability(val.checkInputInt());
+        setName(sc.nextLine().trim());
+        System.out.print("Enter special: ");
+        setSpecialization(sc.nextLine().trim());
+        System.out.print("Enter availibilyti: ");
+        setAvailability(sc.nextInt());
         return new Doctor(code, name, specialization, availability);
     }
 
     public Doctor updateInfo(String code) throws Exception {
         this.code = code;
         System.out.print("Enter new name: ");
-        setName(val.checkInputString());
+        
+        setName(sc.nextLine().trim());
 
         System.out.print("Enter new specialization: ");
-        setSpecialization(val.checkInputString());
+        setSpecialization(sc.nextLine().trim());
 
         System.out.print("Enter new availability: ");
-        setAvailability(val.checkInputInt());
+        setAvailability(sc.nextInt());
 
         return new Doctor(code, name, specialization, availability);
     }
-    
-     public void display(){
-        System.out.printf("%-15s%-20s%-25s%-20s\n", code, name, specialization, availability);
+
+    @Override
+    public String toString() {
+        return String.format("%-15s%-20s%-25s%-20s\n", code, name, specialization, availability);
     }
+    
+ 
 }

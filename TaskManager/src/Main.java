@@ -22,7 +22,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         TaskList taskList = new TaskList();
-       
+
         while (true) {
 
             showMenu();
@@ -42,7 +42,9 @@ public class Main {
                             Task newTask = new Task();
                             System.out.println("-----Add Task-----");
                             newTask.inputTask();
+
                             taskList.addTask(newTask);
+
                             break;
                         } catch (Exception e) {
                             System.out.println(e.getMessage());

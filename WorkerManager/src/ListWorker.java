@@ -55,6 +55,7 @@ public class ListWorker {
         String addStatus;
 
         if (status.equals("INCREASE")) {
+            worker.setSalary(worker.getSalary()+amount);
             newSalary = currentSalary + amount;
             addStatus = "UP";
         } else if (status.equals("DECREASE")) {
