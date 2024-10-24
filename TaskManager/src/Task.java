@@ -15,6 +15,8 @@ import java.util.Scanner;
  * @author anhvu
  */
 public class Task {
+    private static TaskType tt = new TaskType();
+public static List<TaskType> taskTypes = tt.getTaskTypes();
 
     private int id;
     private TaskType taskType;
@@ -30,7 +32,7 @@ public class Task {
     TaskList tl = new TaskList();
 
     Task(Task task) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      
     }
 
     public String getRequirementName() throws Exception {
@@ -125,11 +127,17 @@ public class Task {
     }
 
     public void setTaskType(TaskType taskType) throws Exception {
-        if (requirementName.isEmpty()) {
-            throw new Exception("taskType cannot be null");
-        }
-        this.taskType = taskType;
+    // Check if the provided taskType exists in the taskTypes list
+    boolean isValidTaskType = taskTypes.stream()
+                                       .anyMatch(tt -> tt.getId() == taskType.getId());
+    
+    if (!isValidTaskType) {
+        throw new Exception("Invalid TaskType ID: " + taskType.getId());
     }
+
+    this.taskType = taskType;
+}
+
 
     public Task(int id, Task task) {
         this.id = id;
@@ -171,14 +179,15 @@ public class Task {
     }
 
     private static int lastTaskId = 0;
-    TaskType tt = new TaskType();
+   
 
     public Task inputTask() {
         Scanner scanner = new Scanner(System.in);
+        
         while (true) {
             try {
-                lastTaskId++;
-                setId(lastTaskId);
+                
+                
 
                 System.out.print("Enter Requirement Name: ");
                 String requirementName = scanner.nextLine();
@@ -192,14 +201,16 @@ public class Task {
 
             try {
                 System.out.print("Enter TaskTypeID (1-4): ");
-                int taskTypeID = validate.checkInputLimit(1, 4);
+                int taskTypeID = scanner.nextInt();
 
                 TaskType taskType = tl.getTaskTypeById(taskTypeID);
-
+                if(taskType == null){
+                    System.out.println("Invalid task id. Please try again: ");
+                }
                 setTaskType(taskType);
                 break;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+               
             }
         }
 

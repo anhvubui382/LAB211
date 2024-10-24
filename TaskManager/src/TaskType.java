@@ -13,12 +13,21 @@ public class TaskType {
 
     private int id;
     private String name;
-//    private static List<TaskType> taskTypes = List.of(
-//            new TaskType(1, "Code"),
-//            new TaskType(2, "Test"),
-//            new TaskType(3, "Design"),
-//            new TaskType(4, "Review")
-//    );
+
+    public static List<TaskType> getTaskTypes() {
+        return taskTypes;
+    }
+
+    public static void setTaskTypes(List<TaskType> taskTypes) {
+        TaskType.taskTypes = taskTypes;
+    }
+    
+    private static List<TaskType> taskTypes = List.of(
+            new TaskType(1, "Code"),
+            new TaskType(2, "Test"),
+            new TaskType(3, "Design"),
+            new TaskType(4, "Review")
+    );
 
     public TaskType(int id, String name) {
         this.id = id;

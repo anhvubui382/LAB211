@@ -11,5 +11,29 @@
                 <root id="test.src.dir"/>
             </test-roots>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>cai</word>
+            <word>captcha</word>
+            <word>chu</word>
+            <word>chua</word>
+            <word>Chuoi</word>
+            <word>duoc</word>
+            <word>gom</word>
+            <word>khau</word>
+            <word>khoan</word>
+            <word>khoang</word>
+            <word>lai</word>
+            <word>le</word>
+            <word>lua</word>
+            <word>nhap</word>
+            <word>phai</word>
+            <word>phong</word>
+            <word>rong</word>
+            <word>tai</word>
+            <word>thu</word>
+            <word>tu</word>
+            <word>tuy</word>
+            <word>va</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>

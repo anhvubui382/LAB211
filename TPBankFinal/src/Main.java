@@ -1,19 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+import java.util.Locale;
+import java.util.Scanner;
 
-/**
- *
- * @author anhvu
- */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Scanner scanner = new Scanner(System.in);
+        Ebank ebank = new Ebank();
+        Locale locale;
+
+        while (true) {
+            System.out.println("-------- Login Program --------");
+            System.out.println("1. Vietnamese");
+            System.out.println("2. English");
+            System.out.println("3. Exit");
+            System.out.print("Please choose one option: ");
+
+            int languageChoice = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+
+            switch (languageChoice) {
+                case 1:
+                    locale = new Locale("vi");
+                    ebank.login(locale);
+                    break;
+                case 2:
+                    locale = new Locale("en");
+                    ebank.login(locale);
+                    break;
+                case 3:
+                    System.out.println("Exiting the program. Thank you!");
+                    scanner.close();
+                    return; // Exit the program
+                default:
+                    System.out.println("Invalid choice. Please select again.");
+                    continue; // Ask for input again
+            }
+
+            
+        }
     }
-    
 }
