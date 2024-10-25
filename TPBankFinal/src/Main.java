@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Ebank ebank = new Ebank();
+        EbankHelper eh = new EbankHelper();
         Locale locale;
 
         while (true) {
@@ -21,11 +22,13 @@ public class Main {
             switch (languageChoice) {
                 case 1:
                     locale = new Locale("vi");
-                    ebank.login(locale);
+                    ebank.inputAccount(locale);
+                    eh.login(ebank);
                     break;
                 case 2:
                     locale = new Locale("en");
-                    ebank.login(locale);
+                    ebank.inputAccount(locale);
+                    eh.login(ebank);
                     break;
                 case 3:
                     System.out.println("Exiting the program. Thank you!");
