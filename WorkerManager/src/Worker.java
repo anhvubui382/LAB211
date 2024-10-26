@@ -14,8 +14,8 @@ private ArrayList<SalaryHistory> salaryHistories;
     private String workLocation;
     Scanner scanner = new Scanner(System.in);
 
-    public Worker(String id, String name, int age, Double salary, String workLocation) {
-        this.id = id;
+    public Worker(String id, String name, int age, Double salary, String workLocation) throws Exception {
+        setId(id);
         this.name = name;
         this.age = age;
         this.salary = salary;
