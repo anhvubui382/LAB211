@@ -57,7 +57,7 @@ public class Internship extends Candidate {
         this.university = university;
     }
     
-    public Internship input(){
+    public void input() throws Exception{
         super.input();
          try {
             super.setTypeCandidate(2);
@@ -91,6 +91,5 @@ public class Internship extends Candidate {
             } catch (Exception e) {
             }
         }
-         return this;
-    }
+        }
 }

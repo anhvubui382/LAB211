@@ -161,7 +161,6 @@ public static List<TaskType> taskTypes = tt.getTaskTypes();
     public TaskType getTaskType() {
         return taskType;
     }
-    Validate validate = new Validate();
 
     @Override
     public String toString() {

@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         CandidateList candidateList = new CandidateList();
 
@@ -20,13 +20,55 @@ public class Main {
             sc.nextLine(); // Consume newline
             switch (choice) {
                 case 1: // Experience
-                    candidateList.addCandidate(new Experience().input());
+                    while (true) {
+                        Experience exp = new Experience();
+                        exp.input();
+                        candidateList.addCandidate(exp);
+
+                        System.out.print("Do you want to add another experience candidate? (Y/N): ");
+                        String yn = sc.nextLine().trim().toUpperCase();
+
+                        if (yn.equals("N")) {
+                            break; // Exit the loop if user chooses "N"
+                        } else if (!yn.equals("Y")) {
+                            System.out.println("Invalid input. Please enter Y or N.");
+                        }
+                    }
                     break;
+
                 case 2: // Fresher
-                    candidateList.addCandidate(new Fresher().input());
+                    while (true) {
+                        Fresher fresher = new Fresher();
+                        fresher.input();
+                        candidateList.addCandidate(fresher);
+
+                        System.out.print("Do you want to add another experience candidate? (Y/N): ");
+                        String yn = sc.nextLine().trim().toUpperCase();
+
+                        if (yn.equals("N")) {
+                            break; // Exit the loop if user chooses "N"
+                        } else if (!yn.equals("Y")) {
+                            System.out.println("Invalid input. Please enter Y or N.");
+                        }
+                    }
                     break;
+
                 case 3: // Intern
-                    candidateList.addCandidate(new Internship().input());
+                    while (true) {
+                        Internship intern = new Internship();
+                        intern.input();
+                        candidateList.addCandidate(intern);
+
+                        System.out.print("Do you want to add another experience candidate? (Y/N): ");
+                        String yn = sc.nextLine().trim().toUpperCase();
+
+                        if (yn.equals("N")) {
+                            break; // Exit the loop if user chooses "N"
+                        } else if (!yn.equals("Y")) {
+                            System.out.println("Invalid input. Please enter Y or N.");
+                        }
+                    }
+
                     break;
 
                 case 4: // Searching
@@ -51,12 +93,6 @@ public class Main {
             }
 
             // Nhắc người dùng có muốn tiếp tục hay không
-            System.out.print("Do you want to continue (Y/N)? ");
-            String continueChoice = sc.nextLine();
-            if (continueChoice.equalsIgnoreCase("N")) {
-
-                continue;
-            }
         }
 
     }

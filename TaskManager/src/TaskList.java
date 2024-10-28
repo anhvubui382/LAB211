@@ -7,13 +7,8 @@ import java.util.Scanner;
 
 public class TaskList {
 
-    private static ArrayList<Task> taskList = new ArrayList<>();
-    private static List<TaskType> taskTypes = List.of(
-            new TaskType(1, "Code"),
-            new TaskType(2, "Test"),
-            new TaskType(3, "Design"),
-            new TaskType(4, "Review")
-    );
+    private ArrayList<Task> taskList = new ArrayList<>();
+    private List<TaskType> taskTypes = TaskType.getTaskTypes();
 
     public TaskList() {
     }
@@ -31,7 +26,7 @@ public class TaskList {
     }
 
     // Function to delete task
-    public static void deleteTask(int taskId) throws Exception {
+    public  void deleteTask(int taskId) throws Exception {
         Task taskToDelete = null;
 
         for (Task task : taskList) {
@@ -50,7 +45,7 @@ public class TaskList {
     }
 
     // Function to show tasks
-    public static void showTasks() {
+    public  void showTasks() {
         if (taskList.isEmpty()) {
             System.out.println("No tasks available.");
         } else {
@@ -61,7 +56,7 @@ public class TaskList {
         }
     }
 
-    public static TaskType getTaskTypeById(int id) {
+    public  TaskType getTaskTypeById(int id) {
         for (TaskType taskType : taskTypes) {
             if (taskType.getId() == id) {
                 return taskType;

@@ -40,7 +40,7 @@ public class Experience extends Candidate {
         this.professionalSkill = professionalSkill;
     }
 
-    public Experience input() {
+    public void input() throws Exception {
         
         // Gọi phương thức input() từ lớp cha để nhập các thông tin chung của Candidate
         super.input();
@@ -79,6 +79,5 @@ public class Experience extends Candidate {
         }
 
         // Tạo và trả về một đối tượng Experience mới với các thông tin đã nhập
-        return this;
-    }
+        }
 }

@@ -67,7 +67,7 @@ public final class Fresher extends Candidate {
         this.education = education;
     }
 
-    public Fresher input() {
+    public Fresher input() throws Exception {
         Scanner sc = new Scanner(System.in);
         super.input();
          try {
@@ -106,6 +106,6 @@ public final class Fresher extends Candidate {
                 System.out.println(e.getMessage());
             }
         }
-       return this;
+       return new Fresher(graduationDate, graduationRank, education, id, firstName, lastName, birthDate, address, phone, email, typeCandidate);
     }
 }

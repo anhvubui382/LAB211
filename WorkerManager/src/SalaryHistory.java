@@ -7,7 +7,7 @@ public class SalaryHistory extends Worker implements Comparable<SalaryHistory> {
    
     private String date;
     private String status;
- 
+    
     // Default constructor
     public SalaryHistory() {
      
@@ -25,16 +25,18 @@ public class SalaryHistory extends Worker implements Comparable<SalaryHistory> {
 //        this.status = status;
 //    }
 
+    public SalaryHistory(String date, String status, String id) {
+        super(id);
+        this.date = date;
+        this.status = status;
+    }
+
     public SalaryHistory(String date, String status) {
         this.date = date;
         this.status = status;
     }
 
-    SalaryHistory(Worker worker, String formattedDate, String addStatus) {
-    super(worker.getId(), worker.getName(), worker.getAge(), worker.getSalary(), worker.getWorkLocation());
-    this.date = formattedDate;
-    this.status = addStatus;
-}
+
 
     // Getters and setters
     public String getDate() {

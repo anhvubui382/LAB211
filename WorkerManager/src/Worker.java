@@ -14,6 +14,10 @@ private ArrayList<SalaryHistory> salaryHistories;
     private String workLocation;
     Scanner scanner = new Scanner(System.in);
 
+    public Worker(String id) {
+        this.id = id;
+    }
+
     public Worker(String id, String name, int age, Double salary, String workLocation) throws Exception {
         setId(id);
         this.name = name;
@@ -81,7 +85,7 @@ private ArrayList<SalaryHistory> salaryHistories;
     }
 
 
-    public Worker inputWorker() {
+    public Worker inputWorker() throws Exception {
         while (true) {
             try {
                 System.out.print("Enter worker id: ");

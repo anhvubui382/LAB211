@@ -157,7 +157,7 @@ public String toString() {
             + this.email + " | "
             + this.typeCandidate;
 }
-    public Candidate input() {
+    public void input() throws Exception {
         // Nhập dữ liệu cho đối tượng Candidate
         while (true) {
             try {
@@ -230,7 +230,6 @@ public String toString() {
             }
         }
         
-        // Trả về chính đối tượng hiện tại
-        return this; // Trả về đối tượng Candidate đã nhập
+      
     }
 }
